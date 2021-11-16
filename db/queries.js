@@ -7,6 +7,7 @@ const queries = (() => {
         return db.query(sql)
         .then(results => {
             const [rows] = results
+            //results array doesn't have .map
             return Array.from(rows).map(row => row.dept_name)
         })
     }
@@ -25,6 +26,7 @@ const queries = (() => {
         return db.query(sql)
         .then(results => {
             const [rows] = results
+            //results array doesn't have .map
             return Array.from(rows).map(row => row.title)
         })
     }
@@ -43,6 +45,7 @@ const queries = (() => {
         return db.query(sql)
         .then(results => {
             const [rows] = results
+            //results array doesn't have .map
             return Array.from(rows).map(row => row.first_name + ' ' + row.last_name)
         })
     }

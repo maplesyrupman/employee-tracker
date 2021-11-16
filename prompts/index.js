@@ -80,16 +80,36 @@ const prompts = (() => {
                 message: 'Select the new Employee\'s manager:',
                 choices: employeeNames
             }
-
         ])
     }
+
+    const updateEmployeeRole = async () => {
+        const employeeNames = await queries.getEmployeeNames()
+        const roleNames = await queries.getRoleNames()
+        return inquirer.prompt([
+            {
+                type: 'list',
+                name: 'employee_name',
+                message: 'Which employee\'s role would you like to update:',
+                choices: employeeNames
+            },
+            {
+                type: 'list',
+                name: 'new_role',
+                message: 'Which role would you like to assign them:',
+                choices: roleNames
+            }
+        ])
+    }
+
 
 
     return {
         main,
         addDepartment,
         addRole,
-        addEmployee
+        addEmployee,
+        updateEmployeeRole
     }
 })()
 

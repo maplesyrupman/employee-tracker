@@ -12,8 +12,5 @@ main()
 
 // actionHandler({action: 'add a department'})
 
-// prompts.addDepartment()
-// .then(console.log)
-
-// prompts.addRole()
+// prompts.addEmployee()
 // .then(console.log)

@@ -56,6 +56,7 @@ const prompts = (() => {
 
     const addEmployee = async () => {
         const roleNames = await queries.getRoleNames()
+        const employeeNames = await queries.getEmployeeNames()
         return inquirer.prompt([
             {
                 type: 'input',
@@ -77,7 +78,7 @@ const prompts = (() => {
                 type: 'list',
                 name: 'manager',
                 message: 'Select the new Employee\'s manager:',
-                choices: []
+                choices: employeeNames
             }
 
         ])
@@ -88,6 +89,7 @@ const prompts = (() => {
         main,
         addDepartment,
         addRole,
+        addEmployee
     }
 })()
 

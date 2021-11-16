@@ -18,7 +18,12 @@ function createHandler(action) {
                 createRole(title, salary, dept_id)
             })
         case ('add an employee'):
-            return 
+            return prompts.addEmployee()
+            .then(async ({first_name, last_name, role_title, manager}) => {
+                const role_id = await queries.getRoleId(role_title)
+                const manager_id = await queries.getEmployeeId(manager.split(' '))
+                createEmployee(first_name, last_name, role_id, manager_id)
+            })
     }
 }
 

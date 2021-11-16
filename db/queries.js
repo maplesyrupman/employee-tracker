@@ -25,8 +25,16 @@ const queries = (() => {
         return db.query(sql)
         .then(results => {
             const [rows] = results
-            console.log(Array.from(rows).map(row => row.title))
             return Array.from(rows).map(row => row.title)
+        })
+    }
+
+    function getRoleId(role_title) {
+        const sql = `SELECT id FROM roles WHERE title = ?`
+        return db.query(sql, role_title)
+        .then(results => {
+            const [row] = results
+            return row[0].id
         })
     }
 
@@ -35,19 +43,28 @@ const queries = (() => {
         return db.query(sql)
         .then(results => {
             const [rows] = results
-            console.log(Array.from(rows).map(row => row.first_name + ' ' + row.last_name))
+            return Array.from(rows).map(row => row.first_name + ' ' + row.last_name)
         })
+    }
+
+    function getEmployeeId(firstLastArray) {
+        const sql = `SELECT id FROM employees WHERE first_name = ? AND last_name = ?`
+        return db.query(sql, firstLastArray)
+        .then(results => {
+            const [row] = results
+            return row[0].id
+        })
+        .catch(console.log)
     }
 
     return {
         getDepartmentNames,
         getDepartmentId,
         getRoleNames,
-        getEmployeeNames
+        getRoleId,
+        getEmployeeNames,
+        getEmployeeId
     }
 })()
-
-queries.getEmployeeNames()
-
 
 module.exports = queries

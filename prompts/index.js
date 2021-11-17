@@ -12,10 +12,12 @@ const prompts = (() => {
                     'view all departments',
                     'view all roles',
                     'view all employees', 
+                    'view employees by manager',
                     'add a department',
                     'add a role',
                     'add an employee',
-                    'update an employee role'
+                    'update an employee role',
+                    'update an employee manager'
                 ]
             }
         ])
@@ -102,14 +104,44 @@ const prompts = (() => {
         ])
     }
 
+    const updateEmployeeManager = async () => {
+        const employeeNames = await queries.getEmployeeNames()
+        return inquirer.prompt([
+            {
+                type: 'list',
+                name: 'employee_name',
+                message: 'Which employee\'s manager would you like to update:',
+                choices: employeeNames
+            },
+            {
+                type: 'list',
+                name: 'new_manager',
+                message: 'Who is their new manager:',
+                choices: employeeNames
+            }
+        ])
+    }
 
+    const selectManager = async () => {
+        const employeeNames = await queries.getEmployeeNames()
+        return inquirer.prompt([
+            {
+                type: 'list',
+                name: 'manager_name',
+                message: 'Which manager\'s subordinates would you like to view:',
+                choices: employeeNames
+            }
+        ])
+    }
 
     return {
         main,
         addDepartment,
         addRole,
         addEmployee,
-        updateEmployeeRole
+        updateEmployeeRole,
+        updateEmployeeManager,
+        selectManager
     }
 })()
 

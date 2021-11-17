@@ -8,7 +8,14 @@ function updateHandler(action) {
         case ('update an employee role'):
             return prompts.updateEmployeeRole()
             .then(({employee_name, new_role}) => {
-                updateRole(employee_name, new_role)
+                return updateRole(employee_name, new_role)
+            })
+            
+
+        case ('update an employee manager'):
+            return prompts.updateEmployeeManager()
+            .then(({employee_name, new_manager}) => {
+                updateManager(employee_name, new_manager)
             })
     }
 }
@@ -18,7 +25,15 @@ async function updateRole(employee_name, new_role) {
     const roleId = await queries.getRoleId(new_role)
     const sql = `UPDATE employees SET role_id = ? WHERE id = ?;`
     db.query(sql, [roleId, employeeId])
-    .then(console.log(`${employee_name}'s role changed to ${new_role}`))
+    return `${employee_name}'s role changed to ${new_role}`
+}
+
+async function updateManager(employee_name, new_manager) {
+    const employeeId = await queries.getEmployeeId(employee_name.split(' '))
+    const managerId = await queries.getEmployeeId(new_manager.split(' '))
+    const sql = `UPDATE employees SET manager_id = ? WHERE id = ?;`
+    db.query(sql, [managerId, employeeId])
+    return console.log(`${employee_name}'s manager changed to ${new_manager}`)
 }
 
 

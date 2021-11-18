@@ -15,7 +15,7 @@ function updateHandler(action) {
         case ('update an employee manager'):
             return prompts.updateEmployeeManager()
             .then(({employee_name, new_manager}) => {
-                updateManager(employee_name, new_manager)
+                return updateManager(employee_name, new_manager)
             })
     }
 }
@@ -33,7 +33,7 @@ async function updateManager(employee_name, new_manager) {
     const managerId = await queries.getEmployeeId(new_manager.split(' '))
     const sql = `UPDATE employees SET manager_id = ? WHERE id = ?;`
     db.query(sql, [managerId, employeeId])
-    return console.log(`${employee_name}'s manager changed to ${new_manager}`)
+    return `${employee_name}'s manager changed to ${new_manager}`
 }
 
 

@@ -13,6 +13,7 @@ const prompts = (() => {
                     'view all roles',
                     'view all employees', 
                     'view employees by manager',
+                    'view employees by department',
                     'add a department',
                     'add a role',
                     'add an employee',
@@ -134,6 +135,18 @@ const prompts = (() => {
         ])
     }
 
+    const selectDepartment = async () => {
+        const departmentNames = await queries.getDepartmentNames()
+        return inquirer.prompt([
+            {
+                type: 'list',
+                name: 'dept_name',
+                message: 'Which department\'s members would you like to view:',
+                choices: departmentNames
+            }
+        ])
+    }
+
     return {
         main,
         addDepartment,
@@ -141,7 +154,8 @@ const prompts = (() => {
         addEmployee,
         updateEmployeeRole,
         updateEmployeeManager,
-        selectManager
+        selectManager,
+        selectDepartment
     }
 })()
 

@@ -14,8 +14,3 @@ function main() {
 }
 
 main()
-
-// actionHandler({action: 'add a department'})
-
-// prompts.addEmployee()
-// .then(console.log)

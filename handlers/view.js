@@ -21,7 +21,9 @@ function viewHandler(action) {
 }
 
 function getAllDepartments() {
-    const sql = `SELECT * FROM departments`
+    const sql = `
+    SELECT departments.dept_name
+    `
 
     return db.query(sql)
     .then(results => {
@@ -31,7 +33,12 @@ function getAllDepartments() {
 }
 
 function getAllRoles() {
-    const sql = `SELECT * FROM roles`
+    const sql = `
+    SELECT roles.*, 
+    departments.dept_name as 'Department'
+    FROM roles
+    LEFT JOIN departments
+    on roles.dept_id = departments.id`
 
     return db.query(sql)
     .then(results => {

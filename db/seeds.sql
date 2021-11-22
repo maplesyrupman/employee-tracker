@@ -23,4 +23,6 @@ VALUES
     ('William', 'Weiland', 3, 2),
     ('Jeniffer', 'Something', 4, 1),
     ('Mike', 'Manning', 5, 3),
-    ('Abby', 'Cotts', 6, 5);
+    ('Abby', 'Cotts', 6, 5),
+    ('Julian', 'Benson', 5, 3),
+    ('Sammantha', 'Writer', 6, 7);

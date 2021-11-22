@@ -18,7 +18,10 @@ const prompts = (() => {
                     'add a role',
                     'add an employee',
                     'update an employee role',
-                    'update an employee manager'
+                    'update an employee manager',
+                    'remove an employee',
+                    'remove a role', 
+                    'remove a department'
                 ]
             }
         ])
@@ -147,6 +150,42 @@ const prompts = (() => {
         ])
     }
 
+    const deleteEmployee = async () => {
+        const employees = await queries.getEmployeeNames()
+        return inquirer.prompt([
+            {
+                type: 'list', 
+                name: 'employee_name',
+                message: 'Which employee would you like to remove?',
+                choices: employees
+            }
+        ])
+    }
+
+    const deleteRole = async () => {
+        const roles = await queries.getRoleNames()
+        return inquirer.prompt([
+            {
+                type: 'list',
+                name: 'role_name',
+                message: 'Which role would you like to remove?',
+                choices: roles
+            }
+        ])
+    }
+
+    const deleteDepartment = async () => {
+        const departments = await queries.getDepartmentNames()
+        return inquirer.prompt([
+            {
+                type: 'list', 
+                name: 'dept_name',
+                message: 'Which department would you like to remove?',
+                choices: departments
+            }
+        ])
+    }
+
     return {
         main,
         addDepartment,
@@ -155,7 +194,10 @@ const prompts = (() => {
         updateEmployeeRole,
         updateEmployeeManager,
         selectManager,
-        selectDepartment
+        selectDepartment,
+        deleteEmployee,
+        deleteRole,
+        deleteDepartment
     }
 })()
 

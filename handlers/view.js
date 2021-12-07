@@ -22,7 +22,7 @@ function viewHandler(action) {
 
 function getAllDepartments() {
     const sql = `
-    SELECT departments.dept_name
+    SELECT * FROM departments
     `
 
     return db.query(sql)
